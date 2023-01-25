@@ -14,21 +14,27 @@
 }*/
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 .App-logo {
-  width: 100vmin;
+  width: 80vmin;
   margin-top: 2vh;
   pointer-events: none;
   padding-right: 2vw;
   padding-left: 2vw;
+}
+.headerStyle{
+  display: flex;
+  justify-content: center;
+}
+.buttonAlignment{
+  display: flex;
+  justify-content: center;
+  padding-top: 80px;
 }
 
 .App-link {
@@ -43,3 +49,34 @@
     transform: rotate(360deg);
   }
 }
+
+.button{
+  border-radius: 8px;
+  border: 3px solid #FADC30;
+  font-size: 20px;
+  color: #FADC30;
+  background-color: white;
+  text-align: center;
+  padding: 15px 32px;
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+
+
+}
+.button:hover {
+  background-color: #FADC30;
+  color: white;
+}
+.button:disabled {
+  cursor: not-allowed;
+  background-color: rgb(247, 243, 243);
+  color: #FADC30;
+}
+.blockStyle{
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+}
+
