@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react"
 import axios from "axios"
 import { BiMicrophone, BiMicrophoneOff } from "react-icons/bi";
 import { GiNotebook } from "react-icons/gi";
+import HeaderView from './header';
 
   // Set AssemblyAI Axios Header
   const assembly = axios.create({
@@ -116,9 +117,7 @@ const App = () => {
 
   return (
     <div className='blockStyle'>
-      <h1 className={"headerStyle"}>
-        <img className="App-logo" src="logo.png"></img>
-      </h1>
+      <HeaderView></HeaderView>
       <div className='buttonAlignment'>
         <button className={"button"} disabled={isRecording} onClick={startRecording}>
           <a className={"iconStyle"}>        
