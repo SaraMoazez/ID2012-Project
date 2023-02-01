@@ -15,7 +15,7 @@ import Spinner from 'react-bootstrap/Spinner';
     },
   })
 
-const ButtonView = () => {
+const SummarizationView = () => {
 
 const recorder = useRef(null) //Recorder
   const audioPlayer = useRef(null) //Ref for the HTML Audio Tag
@@ -150,4 +150,4 @@ const recorder = useRef(null) //Recorder
     </div>
   );
  }
- export default ButtonView
+ export default SummarizationView;

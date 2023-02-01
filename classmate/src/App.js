@@ -1,6 +1,6 @@
 import './App.css';
 import HeaderView from './header';
-import ButtonView from './buttons';
+import SummarizationView from './summarization.js';
 import 'bootstrap/dist/css/bootstrap.css';
 import { GoMegaphone } from "react-icons/go";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
@@ -30,7 +30,7 @@ const App = () => {
           by clicking on the play button on the audio player!
         </p>
       </div>
-      <ButtonView></ButtonView>
+      <SummarizationView></SummarizationView>
     </div>
   )
 }
