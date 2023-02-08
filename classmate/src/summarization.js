@@ -1,4 +1,5 @@
 import './App.css';
+import { API_KEY, BASE_URL } from './apiConfig.js';
 import 'bootstrap/dist/css/bootstrap.css';
 import MicRecorder from "mic-recorder-to-mp3"
 import { useEffect, useState, useRef } from "react"
@@ -6,19 +7,19 @@ import axios from "axios"
 import { BiMicrophone, BiMicrophoneOff } from "react-icons/bi";
 import { GiNotebook } from "react-icons/gi";
 import Spinner from 'react-bootstrap/Spinner';
- // Set AssemblyAI Axios Header
+
  const assembly = axios.create({
-    baseURL: "https://api.assemblyai.com/v2",
+    baseURL: BASE_URL,
     headers: {
-      authorization: "c5c138e4921f4b83a484283074eb397a",
+      authorization: API_KEY,
       "content-type": "application/json",
     },
   })
 
 const SummarizationView = () => {
 
-const recorder = useRef(null) //Recorder
-  const audioPlayer = useRef(null) //Ref for the HTML Audio Tag
+  const recorder = useRef(null) 
+  const audioPlayer = useRef(null) 
   const [blobURL, setBlobUrl] = useState(null)
   const [audioFile, setAudioFile] = useState(null)
   const [isRecording, setIsRecording] = useState(null)
@@ -28,23 +29,25 @@ const recorder = useRef(null) //Recorder
   const [transcript, setTranscript] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
+  //Initialize a new instance of the MicRecorder class and store it in the recorder.current state object
   useEffect(() => {
-    //Declares the recorder object and stores it inside of ref
     recorder.current = new MicRecorder({ bitRate: 128 })
   }, [])
 
+  //When the user clicks on "Listen", the recording process of the microphone will start
   const startRecording = () => {
-    // Check if recording isn't blocked by browser
     recorder.current.start().then(() => {
       setIsRecording(true)
     })
   }
 
+  //When the user clicks on "Stop", the recording process will be stopped
+  //the audio data is then converted into a File object, and the blob URL is stored in the component state
   const stopRecording = () => {
     recorder.current
       .stop()
-      .getMp3()
-      .then(([buffer, blob]) => {
+      .getMp3() //retrieve recorded audio data
+      .then(([buffer, blob]) => { 
         const file = new File(buffer, "audio.mp3", {
           type: blob.type,
           lastModified: Date.now(),
@@ -57,7 +60,7 @@ const recorder = useRef(null) //Recorder
       .catch((e) => console.log(e))
   }
 
-  // Upload the Audio File and retrieve the Upload URL
+  //if audioFile state is changed, upload the audio file to AssemblyAI and set the upload URL
   useEffect(() => {
     if (audioFile) {
       assembly
@@ -67,7 +70,7 @@ const recorder = useRef(null) //Recorder
     }
   }, [audioFile])
 
-  // Submit the Upload URL to AssemblyAI and retrieve the Transcript ID
+  //Upload the audio URL to AssemblyAI and retrieve the transcript ID
   const submitTranscriptionHandler = () => {
     assembly
       .post("/transcript", {
@@ -83,7 +86,7 @@ const recorder = useRef(null) //Recorder
       .catch((err) => console.error(err))
   }
 
-  // Check the status of the Transcript
+  //Check the status of the transcription periodically and retrieve the transcript data when it's completed
   const checkStatusHandler = async () => {
     setIsLoading(true)
     try {
@@ -95,7 +98,8 @@ const recorder = useRef(null) //Recorder
     }
   }
 
-  // Periodically check the status of the Transcript
+  //Once the transcriptData.status is equal to "completed", or isLoading is false, retrieve the summary of the transcription
+  //the summary is stored in trancript
   useEffect(() => {
     const interval = setInterval(() => {
       if (transcriptData.status !== "completed" && isLoading) {
@@ -111,7 +115,6 @@ const recorder = useRef(null) //Recorder
   },)
 
   return (
-
     <div>
         <div className='buttonAlignment'>
             <button className={"button"} disabled={isRecording} onClick={startRecording}>
