@@ -1,1 +1,5 @@
-# ID2012-Project
+# ClassMate
+## About
+ClassMate was developed for the project in the course ID2012 Ubiquitous Computing. ClassMate is envisioned as an audio recognition and transcription service to help students create notes based on lectures. It should be able to record long stretches of audio and then analyze them through an AI algorithm. The application should then output a set of notes with key information extracted from the audio.
+
+The finished application performs the majority of its steps without the need for human intervention. When the user clicks the ‘stop’ button, the recorded audio is converted to an audio file without the user having to specify this or tinker with specifications of the file itself. When the user clicks the ‘summarization’ button, the audio file is sent to an online API [Assembly AI](https://www.assemblyai.com/), which processes it and converts it to a summarized version with bullet points. All the user sees of this is the application saying that it is ‘processing’ and then outputting the finished summary. The application is intended to be used in an everyday life scenario (note-taking in lectures), it is internet-connected, and the interface is highly simplified to just three buttons, concealing much of how the application works and what it does.
